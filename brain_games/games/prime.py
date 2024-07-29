@@ -1,13 +1,24 @@
 from brain_games.common import utils
+from colorama import Fore
+import prompt
+import gmpy2
 
 
 # Скрипт самой игры
-def play_prime_game():
+def prime_game() -> tuple[str, str]:
     number = utils.number_gen()
-    result = utils.check_is_prime(number)
-    answer = utils.take_prime_answer(number)
-    return result, answer
+    result = 'yes' if gmpy2.is_prime(number) is True else 'no'
+
+    print(
+        f'{Fore.YELLOW}'
+        'Answer "yes" if given number is prime. Otherwise answer "no".'
+        f'{Fore.RESET}')
+
+    print(f'{Fore.YELLOW}Question: {number}{Fore.RESET}')
+    answer = prompt.string(f'{Fore.YELLOW}Your answer: {Fore.RESET}').lower()
+
+    return result, answer if answer in ['yes', 'no'] else None
 
 
 def start():
-    utils.starting_game(play_prime_game, 3)
+    utils.game_starter(prime_game)
