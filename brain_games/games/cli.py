@@ -1,5 +1,5 @@
-from brain_games.common import utils
+from brain_games.common import game_starter
 
 
-def welcome_user():
-    utils.find_out_name()
+def start() -> None:
+    game_starter()

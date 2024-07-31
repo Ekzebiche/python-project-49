@@ -1,15 +1,32 @@
-from brain_games.common import utils
+from brain_games.common import random_choose, number_gen, game_starter
+from colorama import Fore
+import prompt
 
 
 # Скрипт самой игры
-def play_progression_game():
-    num_start = utils.number_gen(1, 10)
-    num_step = utils.number_gen(1, 10)
-    num_count = utils.number_gen(5, 15)
-    progression, result = utils.make_progression(num_start, num_step, num_count)
-    answer = utils.take_progression_answer(progression)
+def progression_game() -> tuple[str, str]:
+    start = number_gen(1, 10)
+    step = number_gen(1, 10)
+    count = number_gen(5, 15)
+    progression = list(range(start, start + step * count, step))
+
+    result = random_choose(progression)
+    index = progression.index(int(result))
+    progression[index] = '..'
+    prog_list = ' '.join(map(str, progression))
+
+    print(
+        f'{Fore.YELLOW}'
+        'What number is missing in the progression?'
+        f'{Fore.RESET}')
+
+    print(f'{Fore.YELLOW}Question: {prog_list}{Fore.RESET}')
+
+    answer = prompt.string(
+        f'{Fore.YELLOW}Your answer: {Fore.RESET}').lower()
+
     return result, answer
 
 
-def start():
-    utils.starting_game(play_progression_game, 3)
+def start() -> None:
+    game_starter(progression_game)

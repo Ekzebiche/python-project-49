@@ -1,14 +1,25 @@
-from brain_games.common import utils
+from brain_games.common import number_gen, game_starter
+from colorama import Fore
+import prompt
+import math
 
 
 # Скрипт самой игры
-def play_gcd_game():
-    number1 = utils.number_gen()
-    number2 = utils.number_gen()
-    result = utils.count_gcd(number1, number2)
-    answer = utils.take_gcd_answer(number1, number2)
+def gcd_game() -> tuple[str, str]:
+    number1 = number_gen()
+    number2 = number_gen()
+    result = str(math.gcd(number1, number2))
+
+    print(
+        f'{Fore.YELLOW}'
+        'Find the greatest common divisor of given numbers.'
+        f'{Fore.RESET}')
+
+    print(f'{Fore.YELLOW}Question: {number1} {number2}{Fore.RESET}')
+    answer = prompt.string(f'{Fore.YELLOW}Your answer: {Fore.RESET}').lower()
+
     return result, answer
 
 
-def start():
-    utils.starting_game(play_gcd_game, 3)
+def start() -> None:
+    game_starter(gcd_game)

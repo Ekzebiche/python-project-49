@@ -1,7 +1,7 @@
 from brain_games.games.prime import start
 
 
-def main():
+def main() -> None:
     start()
 
 

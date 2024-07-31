@@ -1,7 +1,7 @@
 from brain_games.games.progression import start
 
 
-def main():
+def main() -> None:
     start()
 
 

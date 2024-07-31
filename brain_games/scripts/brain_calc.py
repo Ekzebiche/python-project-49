@@ -3,7 +3,7 @@
 from brain_games.games.calc import start
 
 
-def main():
+def main() -> None:
     start()
 
 
